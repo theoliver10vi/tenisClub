@@ -1,0 +1,215 @@
+<div class="m-3 p-3">
+</div>
+<body>
+    <link href="https://fonts.googleapis.com/css?family=Fugaz+One" rel="stylesheet">
+<!--SECCION 1-->
+<section>
+  <div id="backimage">
+  <!--</div>data-aos-easing="ease-out-cubic"
+  data-aos-duration="2000">-->
+    <div id="backimage-overlay" >
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+        <div class="row justify-content-md-center">
+
+            <!--<span class="aos-init aos-animate" data-aos="highlight-2" data-aos-delay="250" 
+            data-aos-duration="500" data-aos-easing="ease-out-cubic">sus necesidades</span>-->
+
+            <h1 class="whiteText" data-aos="zoom-in" style="
+            font-size:80px;">TENGULAR</h1>
+          </div>
+          <br>
+          <br>  
+          <div class="row justify-content-md-center">
+          <h3 class="center" class="whiteText" data-aos="zoom-in" data-aos-easing="ease-in-sin">Desde 1998, 
+              contamos con las mejores instalaciones
+              y torneos del país. <br>
+              <div class="row justify-content-md-center">¡Conoce nuestra pagina Web!</div>
+          </h3>
+          </div>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <div class="row justify-content-md-center" align="center">
+            <img src="assets/icons/atpPNG.png" width="250" height="100" HSPACE="50" data-aos="fade-right"
+              data-aos-easing="ease-in-sin">
+            
+            <img src="assets/icons/tengular.svg" width="250" height="100" HSPACE="50" data-aos="fade-up" 
+              data-aos-easing="ease-in-sin">
+            
+            <img src="assets/icons/wtaPNG.png" width="250" height="100" HSPACE="50" data-aos="fade-left"
+             data-aos-easing="ease-in-sin">
+
+          </div>
+
+    </div>
+  </div>
+</section>
+
+<!--SECCION 2-->
+
+<section>
+    <div id="backimage2">
+        <div id="backimage-overlay" >
+<br>
+<div class="row justify-content-md-center">
+<h3 class="center" class="whiteText" data-aos="fade-down" style="
+  font-size:50px;">Consulta nuestras Convocatorias</h3>
+</div>
+      
+<div class="container">
+    <div class="row">
+    <div *ngFor="let tournament of tournaments | slice:0:3" class="col-4" style="padding: 20px">
+    <mat-card [routerLink]="['/torneo-seleccionado', tournament.imageT]" appMaterialElevation class="addBorder" 
+      class="example-card">
+      <mat-card-header data-aos="fade-up">
+              <div mat-card-avatar class="example-header-image-single"></div>
+              <mat-card-title>{{tournament.name}}</mat-card-title>
+              <mat-card-subtitle>({{tournament.category}})</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image
+              [src]="tournament.imageT" style="padding: 10px" data-aos="fade-down">
+            <mat-card-content data-aos="zoom-in">
+              <h2 style="text-align: center"><strong>{{tournament.name}}</strong></h2>
+              <br><label><strong>Inicio: </strong>{{tournament.beginDate}}</label>
+              <br><label><strong>Fin: </strong>{{tournament.endDate}}</label>
+              <br><label><strong>Estado: </strong>{{tournament.announcementStatus}}</label>
+              <br><label><strong>Modalidad: </strong>{{tournament.modality}}</label>
+              <br><label><strong>Categoria: </strong>{{tournament.category}}</label>
+            </mat-card-content>
+          </mat-card>
+    </div>
+    </div>
+   <!-- <button mat-raised-button color="accent" class ="whiteText" [routerLink]="['/Convocatorias']" 
+      appMaterialElevation class="addBorder" class="example-card" class="center">Ir a Convocatorias</button>-->
+</div>
+
+</div>
+</div>
+</section>
+
+
+<!--SECCION 3-->
+<section>
+  <div id="backimage4">
+<!--      
+<br>
+<br>
+<br>
+-->
+<div class="row justify-content-md-center">
+<h3 data-aos="fade-down" class="center" style="
+font-size:40px;"><br>VISUALIZA RESULTADOS DE LOS PARTIDOS</h3>
+</div>
+<!--
+<div class="container-12 mt-5 bgColor-light">
+  <div class="container bg-white">-->
+    <div>
+      <img src="assets/images/llavestorneo.PNG" width="1300" height="650" class="center" 
+      style="padding-top:100px " data-aos="zoom-in" data-aos-easing="ease-in-sin">
+    </div> 
+
+</div>
+</section>
+</body>
+
+
+
+
+<!--
+        <br>
+        <h2 >Rol del torneo</h2>
+        <br>
+        <div class="tournament-container">
+        
+         <div class="tournament-headers">
+            <h3>Quarter-Finals</h3>
+            <h3>Semi-Finals</h3>
+            <h3>Final</h3>
+          </div>
+
+          <div class="tournament-brackets">
+        
+            <ul class="bracket bracket-1">
+              <li class="team-item">
+                <app-match-score-info></app-match-score-info>
+              </li>
+              <li class="team-item">
+                <app-match-score-info></app-match-score-info>
+              </li>
+              <li class="team-item">
+                <app-match-score-info></app-match-score-info>
+              </li>
+              <li class="team-item">
+                <app-match-score-info></app-match-score-info>
+              </li>
+            </ul>
+            <ul class="bracket bracket-2">
+              <li class="team-item">
+                <app-match-score-info></app-match-score-info>
+              </li>
+              <li class="team-item">
+                <app-match-score-info></app-match-score-info>
+              </li>
+            </ul>
+            <ul class="bracket bracket-3">
+              <li class="team-item">
+                <app-match-score-info></app-match-score-info>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+
+    <button mat-raised-button color="accent" class ="whiteText" [routerLink]="['/Convocatorias']" 
+      appMaterialElevation class="addBorder" class="example-card" class="center">Ir a Convocatorias</button>
+        -->  
+
+
+
+<!--
+<section>
+    <div id="backimage2" data-aos="flip-left">
+      <div id="backimage-overlay" >
+          <div class="row justify-content-md-center" data-aos="fade-up">
+              <h1 class="whiteText" >TENEMOS LAS MEJORES INSTALACIONES</h1>
+            </div>
+
+      </div>
+    </div>
+
+</section>
+-->
+ <!-- <div class="row justify-content-md-center">
+    <ngb-carousel *ngIf="images" class="mat-elevation-z4">
+      <ng-template ngbSlide>
+        <img [src]="images[0]" alt="Random first slide">
+        <div class="carousel-caption">
+          <h3>First slide label</h3>
+          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+        </div>
+      </ng-template>
+      <ng-template ngbSlide>
+        <img [src]="images[1]" alt="Random second slide">
+        <div class="carousel-caption">
+          <h3>Second slide label</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+      </ng-template>
+      <ng-template ngbSlide>
+        <img [src]="images[2]" alt="Random third slide">
+        <div class="carousel-caption">
+          <h3>Third slide label</h3>
+          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+        </div>
+      </ng-template>
+    </ngb-carousel>
+  </div>-->
+

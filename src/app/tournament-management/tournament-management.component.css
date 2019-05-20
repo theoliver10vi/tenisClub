@@ -1,0 +1,36 @@
+.bgColor-light{
+    background-color: #E6E6E5;
+ }
+
+ .mat-raised-button {
+
+    font-size: 20px;
+    padding: 6px 32px;
+    border-radius: 15px;
+    color: white;
+ }
+ .whiteText{
+    color: white;
+ }
+ mat-form-field {
+   margin-right: 12px;
+ }
+
+ .example-card {
+   max-width: 400px;
+ }
+ 
+ .example-header-image {
+   background-image: url('https://upload.wikimedia.org/wikipedia/an/b/b1/ATP-World-Tour-Masters-1000-Logo.png');
+   background-size: cover;
+ }
+
+ .example-header-image-single{
+   background-image: url('/assets/icons/torneo.svg');
+   background-size: cover;
+ }
+
+ .example-header-image-singleP{
+  background-image: url('/assets/icons/atp.png');
+  background-size: cover;
+}

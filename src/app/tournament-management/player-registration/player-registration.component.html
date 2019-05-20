@@ -1,0 +1,109 @@
+
+<form (ngSubmit)="onGuardarP(formNew)" #formNew="ngForm" class="example-form">
+
+    <h6>Agregar jugador</h6>
+    <br>
+    
+    <div>
+        <mat-form-field class="example-form-field">
+          
+            <input matInput [(ngModel)]="playerIn.name"  [(ngModel)]="UsersIn.name"  #name="ngModel" name="name" id="name" type="text" placeholder="Nombre del jugador"minlength="10" maxlength="40" required>
+           
+            <div *ngIf="name.touched && !name.valid"> 
+              <div *ngIf="name.errors.required" style="color: red;font-size: 10px;">Nombre es requerido</div>
+              <div *ngIf="name.errors.minlength" style="color: red; font-size: 10px;">Nombre debe ser de al menos {{name.errors.minlength.requiredLength}} caracteres.</div>
+            </div>
+
+          </mat-form-field>
+    </div>
+
+    <div>
+
+      <mat-form-field class="example-form-field">
+          <input matInput [(ngModel)]="playerIn.age" #age="ngModel"  name="age" id="age" type="number" value ="13" placeholder="Edad"  min="13" max="65" required>
+
+      </mat-form-field>
+
+      <mat-form-field class="example-form-field">
+          <input matInput [(ngModel)]="playerIn.currentRank" #currentRank="ngModel" name="currentRank" id="currentRank" type="number" placeholder="Ranking" min="1" max="250" required>
+      </mat-form-field>
+      
+    </div>
+
+  <div>
+    <mat-form-field class="example-form-field">
+        <input matInput [(ngModel)]="playerIn.playerCountry" #playerCountry="ngModel" name="playerCountry" id="playerCountry" type="text" placeholder="Ciudad de Nacimiento" minlength="10" maxlength="40" required>
+
+        <div *ngIf="playerCountry.touched && !playerCountry.valid"> 
+            <div *ngIf="playerCountry.errors.required" style="color: red;font-size: 10px;">Ciudad es requerida</div>
+            <div *ngIf="playerCountry.errors.minlength" style="color: red; font-size: 10px;">Ciudad debe ser de al menos {{playerCountry.errors.minlength.requiredLength}} caracteres.</div>
+        </div>
+
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Genero</mat-label>
+        <select matNativeControl [(ngModel)]="playerIn.gender" #gender="ngModel" name="gender" id="gender" required>
+          <option value="Masculino">Masculino</option>
+          <option value="Femenino">Femenino</option>
+        </select>
+        <div *ngIf="gender.touched && !gender.valid"> 
+            <div *ngIf="gender.errors.required" style="color: red;font-size: 10px;">Genero es requerido</div>
+        </div>
+      </mat-form-field>
+  </div>
+
+
+  <div>
+    <mat-form-field class="example-form-field">
+        <input matInput [(ngModel)]="playerIn.playerPoints" #playerPoints="ngModel" name="playerPoints" id="playerPoints" type="number" placeholder="Puntos"min="1"required>
+      </mat-form-field>
+  </div>
+
+
+    <div>
+        <mat-form-field class="example-form-field">
+            <input matInput [(ngModel)]="playerIn.federation" #federation="ngModel" name="federation" id="federation" type="text" placeholder="Federación"minlength="8" maxlength="10" required>
+            <div *ngIf="federation.touched && !federation.valid"> 
+                <div *ngIf="federation.errors.required" style="color: red;font-size: 10px;">Federacion es requerida</div>
+                <div *ngIf="federation.errors.minlength" style="color: red; font-size: 10px;">El nombre de federacion debe ser de al menos {{name.errors.minlength.requiredLength}} caracteres.</div>
+              </div>
+        </mat-form-field>
+
+        <mat-form-field class="example-form-field">
+            <input matInput [(ngModel)]="playerIn.license"  [(ngModel)]="UsersIn.password" #license="ngModel" name="license" id="license" type="text" placeholder="Licencia" minlength="8" maxlength="10" required>
+            <div *ngIf="license.touched && !license.valid"> 
+                <div *ngIf="license.errors.required" style="color: red;font-size: 10px;">Licencia es requerida</div>
+                <div *ngIf="license.errors.minlength" style="color: red; font-size: 10px;">Licencia debe ser de al menos {{name.errors.minlength.requiredLength}} caracteres.</div>
+              </div>
+        </mat-form-field>
+    </div>
+
+
+
+    <input matInputFile type="file" accept=".png, .jpg, .jpge" (change)="onUpload($event)" class="botones">
+      <section class="example-section">
+      <mat-progress-bar
+          class="example-margin"
+          style="height: 20px"
+          color="warn"
+          mode="determinate"
+          [value]="uploadPercent | async"
+          [bufferValue]="bufferValue">
+      </mat-progress-bar>
+      </section>
+
+      <label #imagenP id="imagenP" style="visibility: hidden; font-size: 0px">{{urlImage | async}}</label>
+
+      <div class="example-button-row">
+        <button *ngIf="urlImage | async; else btnDisabled" mat-stroked-button type="submit" color="accent" class="botones">Aceptar</button>
+        <ng-template #btnDisabled>
+          <button mat-stroked-button type="submit" disabled=true color="accent" class="botones">Aceptar</button>
+          </ng-template>
+        <button mat-stroked-button color="accent" type="button" class="botones" (click)="closeDialog()">Cancelar</button>
+      </div>
+
+
+    
+  </form>
+    

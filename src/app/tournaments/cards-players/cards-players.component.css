@@ -1,0 +1,15 @@
+.whiteText{
+  color: white;
+}
+.example-card {
+max-width: 400px;
+}
+
+.example-header-image {
+background-image: url('https://upload.wikimedia.org/wikipedia/an/b/b1/ATP-World-Tour-Masters-1000-Logo.png');
+background-size: cover;
+}
+.example-header-image-single{
+background-image: url('https://upload.wikimedia.org/wikipedia/an/9/90/ATP_250_Series_logo.png');
+background-size: cover;
+}

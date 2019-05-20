@@ -1,0 +1,68 @@
+<div class="container-12 mt-5 pt-4 bgColor-light">
+  <div class="container bg-white">
+    <div class="example-small-box" align="center">
+
+      <div class="p-4">
+        <mat-form-field color="accent" class="mr-2 d-inline-block">
+          <mat-label>Modalidades</mat-label>
+          <mat-select [(value)]="mod" (selectionChange)="onFilter()">
+            <mat-option value="todas">
+              Todas
+            </mat-option>
+            <mat-option value="sencillo">
+              Sencillo
+            </mat-option>
+            <mat-option value="doble">
+              Doble
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field color="accent" class="ml-2 d-inline-block">
+          <mat-label>Categorias</mat-label>
+          <mat-select [(value)]="cat" (selectionChange)="onFilter()">
+            <mat-option value="todas">
+              Todas
+            </mat-option>
+            <mat-option value="varonil">
+              Varonil
+            </mat-option>
+            <mat-option value="femenil">
+              Femenil
+            </mat-option>
+            <mat-option value="mixto">
+              Mixto
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div *ngIf="tournamentsFilter?.length > 0; else noTournaments" class="container">
+        <div class="row">
+          <div *ngFor="let tournament of tournamentsFilter" class="col-4" style="padding: 20px">
+            <mat-card [routerLink]="['/arbitro', tournament.id]" appMaterialElevation>
+              <mat-card-header>
+                <div mat-card-avatar class="tournament-icon"></div>
+                <h4>{{tournament.name}}</h4>
+              </mat-card-header>
+              <img mat-card-image
+                   [src]="tournament.imageT" style="padding: 10px; height: 225px; width: 315px">
+              <mat-card-content>
+                <label><strong>Inicio: </strong>{{tournament.beginDate}}</label>
+                <br><label><strong>Fin: </strong>{{tournament.endDate}}</label>
+                <br><label><strong>Estado: </strong>{{tournament.tournamentStatus | titlecase}}</label>
+                <br><label><strong>Modalidad: </strong>{{tournament.modality | titlecase}}</label>
+                <br><label><strong>Categoría: </strong>{{tournament.category | titlecase}}</label>
+                <br><label><strong>Participantes: </strong>{{tournament.numberOfPlayers}}</label>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+      <ng-template #noTournaments>
+        <br>
+        <h5>No existen Torneos</h5>
+      </ng-template>
+    </div>
+  </div>
+</div>

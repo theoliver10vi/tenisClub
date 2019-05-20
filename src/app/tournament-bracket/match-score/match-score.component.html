@@ -1,0 +1,61 @@
+<mat-card appMaterialElevation defaultElevation=1 class="p-0 m-0" (mouseenter)="onInside()" (mouseleave)="onOutside()">
+  <mat-card-content class="m-0 p-0">
+    <table class="matchResult" *ngIf="match.played || match.player.length >= 1; else pendiente">
+      <tr>
+        <td class="player justify-content-center align-content-center">
+          <mat-icon class="d-inline float-left pr-2"
+                    *ngIf="this.match.played && this.match.round == '1' && match.winner == match.player[0]">looks_one
+          </mat-icon>
+          <p class="pt-3" [ngClass]="{winner: match.winner.includes(match.player[0]) && match.round !='1' ,
+                                champion:match.winner==match.player[0] && match.round=='1' }"
+             *ngIf="match.player.length <= 2">{{match.player[0]}}</p>
+          <div [ngClass]="{winner: match.winner.includes(match.player[0]) && match.round != '1', champion:match.winner == match.player[0] && match.round == '1'}"
+               class="flex-column" *ngIf="match.player.length > 2">
+            <p class="m-0 p-0">{{match.player[0]}}</p>
+            <p class="m-0 p-0">{{match.player[1]}}</p>
+          </div>
+        </td>
+        <div class="pt-2" *ngIf="this.match.played">
+          <td class="pt-2"
+              [ngClass]="{setTop: match.score.team1[i].points > 0 || match.score.team2[i].points > 0 }"
+              *ngFor="let set of match.score.team1; index as i;">
+            {{set.points | points: match.score.team2[i].points}}
+            <sup class="tiebreak">{{set.tiebreakPoints | points: match.score.team2[i].tiebreakPoints}}</sup>
+          </td>
+        </div>
+      </tr>
+      <tr>
+        <td class="player">
+          <mat-icon class="d-inline float-left pr-2"
+                    *ngIf="this.match.played && this.match.round == '1' && match.winner == match.player[1]">looks_one
+          </mat-icon>
+          <p [ngClass]="{winner: match.winner.includes(match.player[1]) && match.round != '1', champion:match.winner == match.player[1] && match.round == '1'}"
+             *ngIf="match.player.length <= 2">{{match.player[1]}}</p>
+          <div [ngClass]="{winner: match.winner.includes(match.player[2]) && match.round != '1', champion:match.winner == match.player[1] && match.round == '1'}"
+               class="flex-column" *ngIf="match.player.length > 2">
+            <p class="m-0 p-0">{{match.player[2]}}</p>
+            <p class="m-0 p-0">{{match.player[3]}}</p>
+          </div>
+        </td>
+        <div class="pb-2" *ngIf="this.match.played">
+          <td class="pb-3"
+              [ngClass]="{setBottom: match.score.team1[i].points > 0 || match.score.team2[i].points > 0 }"
+              *ngFor="let set of match.score.team2; index as i;">
+            {{set.points | points: match.score.team1[i].points}}
+            <sup class="tiebreak">{{set.tiebreakPoints | points: match.score.team1[i].tiebreakPoints}}</sup>
+          </td>
+        </div>
+      </tr>
+    </table>
+    <ng-template #pendiente>
+      <div class="p-4">
+        <h5>Pendiente</h5>
+        <p *ngIf="match.date != ''">Se juega el: {{this.match.date}}</p>
+      </div>
+    </ng-template>
+    <!-- <p *ngIf="match.player.length >=2 && !match.played && match.date != ''">Se juega el: {{this.match.date}}</p> -->
+  </mat-card-content>
+  <button mat-stroked-button color="accent" class="mb-2"
+          *ngIf="this.match.played == false && this.match.player.length >= 2 && !this.match.suspended"
+          (click)="openDialog()">Ingresar Marcador</button>
+</mat-card>

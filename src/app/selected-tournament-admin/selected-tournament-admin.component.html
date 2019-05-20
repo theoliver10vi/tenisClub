@@ -1,0 +1,156 @@
+<div class="container-12 mt-5 pt-4 pb-2 bgColor-light">
+
+  <div class="container bg-white" align="center">
+    <div class="pt-4"></div>
+    <h1 class="d-inline px-3 py-1" *ngIf="selectedTournament != undefined"> {{selectedTournament.name}} </h1>
+    <div class="pt-4"></div>
+    <div class="container mt-0 pt-2">
+      <div class="row justify-content-start">
+        <div class="col-sm-12 col-lg-4">
+          <mat-card [class.mat-elevation-z3]="!isActive" *ngFor="let tournament of tournaments" class="addBorder"
+                    class="example-card">
+            <h4>Información</h4>
+            <img mat-card-image
+                 [src]="tournament.imageT" style="padding: 10px">
+            <mat-card-content>
+              <br><label><strong>Inicio: </strong>{{tournament.beginDate}}</label>
+              <br><label><strong>Fin: </strong>{{tournament.endDate}}</label>
+              <br><label><strong>Estado Torneo: </strong>{{tournament.tournamentStatus}}</label>
+              <br><label><strong>Estado Convocatoria: </strong>{{tournament.announcementStatus}}</label>
+              <br><label><strong>Numero Competidores: </strong>{{tournament.numberOfPlayers}}</label>
+              <br><label><strong>Modalidad: </strong>{{tournament.modality | titlecase}}</label>
+              <br><label><strong>Categoría: </strong>{{tournament.category | titlecase}}</label>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <div class="col-sm-12 col-lg-8">
+          <div class="m-3">
+
+            <div *ngFor="let tournament of tournaments">
+              <h4 *ngIf=" tournament.modality=='sencillo'">Jugadores inscritos</h4>
+              <h4 *ngIf=" tournament.modality=='doble'">Equipos inscritos</h4>
+            </div>
+            <mat-table [dataSource]=" sourcePlayersTeams" class="mat-elevation-z2">
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef [style.color]="'#EE8134'"> Jugadores </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element}} </mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+          </div>
+
+          <div class="example-small-box " align="right">
+
+            <button *ngIf="selectedTournament.enrolledPlayers.length < selectedTournament.numberOfPlayers" mat-raised-button (click)="openPlayersDialog()" color="accent"
+                    style="color: white; margin-right: 1rem">
+              <mat-icon>add</mat-icon>Nuevo
+            </button>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <app-tournament-bracket-admin [tournamentId]="tournamentId"></app-tournament-bracket-admin> -->
+  <app-tournament-bracket-admin *ngIf="tournaments != undefined" [tournament]="selectedTournament">
+  </app-tournament-bracket-admin>
+
+  <!--Dialogo de Inscripcion de JUgadores-->
+  <ng-template #playersDialog>
+    <div class="row justify-content-center">
+      <h1 matDialogTitle>Inscripción de Jugadores</h1>
+    </div>
+    <mat-dialog-content>
+      <div class="row justify-content-center">
+        <div class="col justify-content-center">
+          <img [src]="imgPlayer" *ngIf="imgPlayer != null" class="imgRedonda" style="margin-left: 45px">
+        </div>
+        <div class="col justify-content-center">
+          <mat-form-field color="accent" style="padding: 10px; margin-top: 20px;">
+            <mat-label>Seleccionar Jugador</mat-label>
+            <mat-select [(value)]="playerT" (selectionChange)="onPlayerImage($event)" [formControl]="playerControl"
+                        required>
+              <mat-option *ngFor="let player of availablePlayers1" [value]="player.name">
+                {{player.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="playerControl.hasError('required')">Seleccione Jugador</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-dialog-content>
+    <div class="row justify-content-end">
+      <div mat-dialog-actions class="mt-0 mr-1">
+        <button mat-raised-button color="accent" class="text-white" style="outline:none;"
+                (click)="onUpdateTournament()" *ngIf="playerT; else btnDisabled2">Aceptar</button>
+        <ng-template #btnDisabled2>
+          <button mat-raised-button color="accent" class="text-white" style="outline:none;"
+                  disabled=true>Aceptar</button>
+        </ng-template>
+        <div class="m-1"></div>
+        <button mat-raised-button style="outline:none;" (click)="closePlayersDialog()">Cancelar</button>
+      </div>
+    </div>
+  </ng-template>
+
+  <!--Dialogo de Inscripcion de JUgadores Dobles-->
+  <ng-template #playersDialogDouble>
+    <div class="row justify-content-center">
+      <h1 matDialogTitle>Inscripción de Equipo</h1>
+    </div>
+    <mat-dialog-content>
+      <div class="row justify-content-center">
+        <div class="col justify-content-center">
+          <img [src]="imgPlayer" *ngIf="imgPlayer != null" class="imgRedonda" style="margin-left: 45px">
+        </div>
+        <div class="col justify-content-center">
+          <mat-form-field color="accent" style="padding: 10px; margin-top: 20px;">
+            <mat-label>Seleccionar Jugador 1</mat-label>
+            <mat-select [(value)]="playerT" (selectionChange)="onPlayerImage($event)" [formControl]="pl1Control"
+                        required>
+              <mat-option *ngFor="let player of availablePlayers1" [value]="player.name">
+                {{player.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="pl1Control.hasError('required')">Seleccione Jugador 1</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col justify-content-center" style="padding: 15px">
+          <img [src]="imgPlayer2" *ngIf="imgPlayer2 != null" class="imgRedonda" style="margin-left: 45px">
+        </div>
+        <div class="col justify-content-center">
+          <mat-form-field color="accent" style="padding: 10px; margin-top: 20px;">
+            <mat-label>Seleccionar Jugador 2</mat-label>
+            <mat-select [(value)]="playerT2" (selectionChange)="onPlayerImage2($event)" [formControl]="pl2Control"
+                        required>
+              <mat-option *ngFor="let player2 of availablePlayers2" [value]="player2.name">
+                {{player2.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="pl2Control.hasError('required')">Seleccione Jugador 2</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-dialog-content>
+    <div class="row justify-content-end">
+      <div mat-dialog-actions class="mt-0 mr-1">
+        <button mat-raised-button color="accent" class="text-white" style="outline:none;"
+                (click)="onUpdateTournament()" *ngIf="playerT2 && playerT; else btnDisabled">Aceptar</button>
+        <ng-template #btnDisabled>
+          <button mat-raised-button color="accent" class="text-white" style="outline:none;"
+                  disabled=true>Aceptar</button>
+        </ng-template>
+        <div class="m-1"></div>
+        <button mat-raised-button style="outline:none;" (click)="closePlayersDialog()">Cancelar</button>
+      </div>
+    </div>
+  </ng-template>
+
+</div>

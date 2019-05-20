@@ -1,0 +1,106 @@
+<div class="container-12 mt-5 pt-4 pb-2 bgColor-light">
+  <div class="container bg-white p-2">
+
+    <div class="row justify-content-center my-3">
+      <h2 class="d-inline text-center bgColor-Accent text-white px-2">{{tournament.name}}</h2>
+    </div>
+
+    <div class="tournament-container" *ngIf="this.tournament.numberOfPlayers == 8">
+      <div class="tournament-headers">
+        <h4>1/4 de final</h4>
+        <h4>Semifinales</h4>
+        <h4>Final</h4>
+      </div>
+
+      <div class="tournament-brackets">
+
+        <ul class="bracket bracket-1">
+          <li class="team-item" *ngFor="let match of matches4">
+            <app-match-score [match]="match" (winnerSelected)="onWinnerSelected(4,$event)"></app-match-score>
+          </li>
+        </ul>
+        <ul class="bracket bracket-2">
+          <li class="team-item" *ngFor="let match of matches2">
+            <app-match-score [match]="match" (winnerSelected)="onWinnerSelected(2,$event)"></app-match-score>
+          </li>
+        </ul>
+        <ul class="bracket bracket-3">
+          <li class="team-item" *ngFor="let match of matches1">
+            <app-match-score [match]="match"></app-match-score>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tournament-container" *ngIf="this.tournament.numberOfPlayers == 16">
+      <div class="tournament-headers">
+        <h4>Ronda de 16</h4>
+        <h4>1/4 de final</h4>
+        <h4>Semifinales</h4>
+        <h4>Final</h4>
+      </div>
+
+      <div class="tournament-brackets">
+        <ul class="bracket bracket-1">
+          <li class="team-item" *ngFor="let match of matches8">
+            <app-match-score [match]="match" (winnerSelected)="onWinnerSelected(8,$event)"></app-match-score>
+          </li>
+        </ul>
+        <ul class="bracket bracket-2">
+          <li class="team-item" *ngFor="let match of matches4">
+            <app-match-score [match]="match" (winnerSelected)="onWinnerSelected(4,$event)"></app-match-score>
+          </li>
+        </ul>
+        <ul class="bracket bracket-3">
+          <li class="team-item" *ngFor="let match of matches2">
+            <app-match-score [match]="match" (winnerSelected)="onWinnerSelected(2,$event)"></app-match-score>
+          </li>
+        </ul>
+        <ul class="bracket bracket-4">
+          <li class="team-item" *ngFor="let match of matches1">
+            <app-match-score [match]="match"></app-match-score>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tournament-container" *ngIf="this.tournament.numberOfPlayers == 32">
+      <div class="tournament-headers">
+        <h4>Ronda de 32</h4>
+        <h4>Ronda de 16</h4>
+        <h4>1/4 de final</h4>
+        <h4>Semifinales</h4>
+        <h4>Final</h4>
+      </div>
+
+      <div class="tournament-brackets">
+        <ul class="bracket bracket-1">
+          <li class="team-item" *ngFor="let match of matches16">
+            <app-match-score [match]="match" (winnerSelected)="onWinnerSelected(16,$event)"></app-match-score>
+          </li>
+        </ul>
+        <ul class="bracket bracket-2">
+          <li class="team-item" *ngFor="let match of matches8">
+            <app-match-score [match]="match" (winnerSelected)="onWinnerSelected(8,$event)"></app-match-score>
+          </li>
+        </ul>
+        <ul class="bracket bracket-3">
+          <li class="team-item" *ngFor="let match of matches4">
+            <app-match-score [match]="match" (winnerSelected)="onWinnerSelected(4,$event)"></app-match-score>
+          </li>
+        </ul>
+        <ul class="bracket bracket-4">
+          <li class="team-item" *ngFor="let match of matches2">
+            <app-match-score [match]="match" (winnerSelected)="onWinnerSelected(2,$event)"></app-match-score>
+          </li>
+        </ul>
+        <ul class="bracket bracket-5">
+          <li class="team-item" *ngFor="let match of matches1">
+            <app-match-score [match]="match"></app-match-score>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>

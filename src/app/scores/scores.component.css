@@ -1,0 +1,38 @@
+.setTop {
+	padding-left: 1em;
+	padding-right: 1em;
+	border-left: 1px solid #E1E1E1;
+	border-right: 1px solid #E1E1E1;
+	border-bottom: 1px solid #E1E1E1;
+ }
+ 
+ .setBottom {
+	padding-left: 1rem;
+	padding-right: 1rem;
+	border-left: 1px solid #E1E1E1;
+	border-right: 1px solid #E1E1E1;
+ }
+ 
+ .player {
+	padding-right: 1rem;
+ }
+ 
+ .winner {
+	font-weight: bold;
+ }
+ .whiteText {
+	color: white;
+	align-items: center;
+ }
+ .matchResult {
+	margin-left: auto;
+	margin-right: auto;
+ }
+ 
+ .addBorder {
+	border: 1px solid transparent;
+ }
+ 
+ .bgColor-Accent{
+	background-color: #EE8133;
+ }

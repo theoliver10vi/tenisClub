@@ -1,0 +1,234 @@
+<h2 class="text-center">Marcador</h2>
+<div mat-dialog-content>
+  <div class="row justify-content-center">
+    <table class="matchResult">
+      <tr class="m-4 p-2">
+        <td class="player pt-4">
+          <h6 *ngIf="match.player.length <= 2">{{match.player[0]}}</h6>
+          <div class="flex-column" *ngIf="match.player.length > 2">
+            <h6 class="m-0 p-0">{{match.player[0]}}</h6>
+            <h6 class="m-0 p-0">{{match.player[1]}}</h6>
+          </div>
+          <p *ngIf="playerQuited.filled && playerQuited.playerName == match.player[0]"
+             class="text-black-50 text-center">(Abandonó)</p>
+        </td>
+        <div class="pt-2">
+          <td class="setTop pt-4">
+            <mat-form-field class="scoreInput" color="accent">
+              <input matInput (change)="onPointChange($event,0,1)"
+                     [(ngModel)]="match.score.team1[0].points" type="number"
+                     min="0" max="7">
+            </mat-form-field>
+            <mat-form-field class="scoreInput tiebreak" color="accent"
+                            *ngIf="match.score.team1[0].points >=7 || match.score.team2[0].points >= 7">
+              <input matInput [(ngModel)]="match.score.team1[0].tiebreakPoints" type="number"
+                     (change)="onTiebreakPointChange($event,0,1)"
+                     min="0">
+            </mat-form-field>
+          </td>
+
+          <td class="setTop pt-4">
+            <mat-form-field class="scoreInput" color="accent">
+              <input matInput (change)="onPointChange($event,1,1)"
+                     [(ngModel)]="match.score.team1[1].points" type="number"
+                     min="0" max="7">
+            </mat-form-field>
+            <mat-form-field class="scoreInput tiebreak" color="accent"
+                            *ngIf="match.score.team1[1].points >=7 || match.score.team2[1].points >= 7">
+              <input matInput [(ngModel)]="match.score.team1[1].tiebreakPoints" type="number"
+                     (change)="onTiebreakPointChange($event,1,1)"
+                     min="0">
+            </mat-form-field>
+          </td>
+
+          <td class="setTop pt-4">
+            <mat-form-field class="scoreInput" color="accent">
+              <input matInput (change)="onPointChange($event,2,1)"
+                     [(ngModel)]="match.score.team1[2].points" type="number"
+                     min="0" max="7">
+            </mat-form-field>
+            <mat-form-field class="scoreInput tiebreak" color="accent"
+                            *ngIf="match.score.team1[2].points >=7 || match.score.team2[2].points >= 7">
+              <input matInput [(ngModel)]="match.score.team1[2].tiebreakPoints" type="number"
+                     (change)="onTiebreakPointChange($event,2,1)"
+                     min="0">
+            </mat-form-field>
+          </td>
+
+          <td class="setTop pt-4" *ngIf="match.round == '1'">
+            <mat-form-field class="scoreInput" color="accent">
+              <input matInput (change)="onPointChange($event,3,1)"
+                     [(ngModel)]="match.score.team1[3].points" type="number"
+                     min="0" max="7">
+            </mat-form-field>
+            <mat-form-field class="scoreInput tiebreak" color="accent"
+                            *ngIf="match.score.team1[3].points >=7 || match.score.team2[3].points >= 7">
+              <input matInput [(ngModel)]="match.score.team1[3].tiebreakPoints" type="number"
+                     (change)="onTiebreakPointChange($event,3,1)"
+                     min="0">
+            </mat-form-field>
+          </td>
+
+          <td class="setTop pt-4" *ngIf="match.round == '1'">
+            <mat-form-field class="scoreInput" color="accent">
+              <input matInput (change)="onPointChange($event,4,1)"
+                     [(ngModel)]="match.score.team1[4].points" type="number"
+                     min="0" max="7">
+            </mat-form-field>
+            <mat-form-field class="scoreInput tiebreak" color="accent"
+                            *ngIf="match.score.team1[4].points >=7 || match.score.team2[4].points >= 7">
+              <input matInput [(ngModel)]="match.score.team1[4].tiebreakPoints" type="number"
+                     (change)="onTiebreakPointChange($event,4,1)"
+                     min="0">
+            </mat-form-field>
+          </td>
+          <td class="ml-2 pl-4">
+            <button *ngIf="!this.playerQuited.filled" matTooltip="Abandonó" matTooltipPosition="right" mat-mini-fab
+                    color="primary"
+                    (click)="openAbandonDialog(1)" class="mr-3">
+              <mat-icon aria-label="label">directions_run</mat-icon>
+            </button>
+          </td>
+        </div>
+      </tr>
+
+
+      <tr class="m-4 p-2">
+        <td class=" player pt-2">
+          <h6 *ngIf="match.player.length <= 2">{{match.player[1]}}</h6>
+          <div class="flex-column" *ngIf="match.player.length > 2">
+            <h6 class="m-0 p-0">{{match.player[2]}}</h6>
+            <h6 class="m-0 p-0">{{match.player[3]}}</h6>
+          </div>
+          <p *ngIf="playerQuited.filled && playerQuited.playerName == match.player[1]"
+             class="text-black-50 text-center">(Abandonó)</p>
+        </td>
+        <div class="pb-2">
+          <td class="setBottom pt-4">
+            <mat-form-field class="scoreInput" color="accent">
+              <input matInput (change)="onPointChange($event,0,2)"
+                     [(ngModel)]="match.score.team2[0].points" type="number"
+                     min="0" max="7">
+            </mat-form-field>
+            <mat-form-field class="scoreInput tiebreak" color="accent"
+                            *ngIf="match.score.team1[0].points >=7 || match.score.team2[0].points >= 7">
+              <input matInput [(ngModel)]="match.score.team2[0].tiebreakPoints" type="number"
+                     (change)="onTiebreakPointChange($event,0,2)"
+                     min="0">
+            </mat-form-field>
+          </td>
+
+          <td class="setBottom pt-4">
+            <mat-form-field class="scoreInput" color="accent">
+              <input matInput (change)="onPointChange($event,1,2)"
+                     [(ngModel)]="match.score.team2[1].points" type="number"
+                     min="0" max="7">
+            </mat-form-field>
+            <mat-form-field class="scoreInput tiebreak" color="accent"
+                            *ngIf="match.score.team1[1].points >=7 || match.score.team2[1].points >= 7">
+              <input matInput [(ngModel)]="match.score.team2[1].tiebreakPoints" type="number"
+                     (change)="onTiebreakPointChange($event,1,2)"
+                     min="0">
+            </mat-form-field>
+          </td>
+
+          <td class="setBottom pt-4">
+            <mat-form-field class="scoreInput" color="accent">
+              <input matInput (change)="onPointChange($event,2,2)"
+                     [(ngModel)]="match.score.team2[2].points" type="number"
+                     min="0" max="7">
+            </mat-form-field>
+            <mat-form-field class="scoreInput tiebreak" color="accent"
+                            *ngIf="match.score.team1[2].points >=7 || match.score.team2[2].points >= 7">
+              <input matInput [(ngModel)]="match.score.team2[2].tiebreakPoints" type="number"
+                     (change)="onTiebreakPointChange($event,2,2)"
+                     min="0">
+            </mat-form-field>
+          </td>
+
+          <td class="setBottom pt-4" *ngIf="match.round == '1'">
+            <mat-form-field class="scoreInput" color="accent">
+              <input matInput (change)="onPointChange($event,3,2)"
+                     [(ngModel)]="match.score.team2[3].points" type="number"
+                     min="0" max="7">
+            </mat-form-field>
+            <mat-form-field class="scoreInput tiebreak" color="accent"
+                            *ngIf="match.score.team1[3].points >=7 || match.score.team2[3].points >= 7">
+              <input matInput [(ngModel)]="match.score.team2[3].tiebreakPoints" type="number"
+                     (change)="onTiebreakPointChange($event,3,2)"
+                     min="0">
+            </mat-form-field>
+          </td>
+
+          <td class="setBottom pt-4" *ngIf="match.round == '1'">
+            <mat-form-field class="scoreInput" color="accent">
+              <input matInput (change)="onPointChange($event,4,2)"
+                     [(ngModel)]="match.score.team2[4].points" type="number"
+                     min="0" max="7">
+            </mat-form-field>
+            <mat-form-field class="scoreInput tiebreak" color="accent"
+                            *ngIf="match.score.team1[4].points >=7 || match.score.team2[4].points >= 7">
+              <input matInput [(ngModel)]="match.score.team2[4].tiebreakPoints" type="number"
+                     (change)="onTiebreakPointChange($event,4,2)"
+                     min="0">
+            </mat-form-field>
+          </td>
+          <td class="ml-2 pl-4">
+            <button *ngIf="!this.playerQuited.filled" matTooltip="Abandonó" matTooltipPosition="right" mat-mini-fab
+                    color="primary"
+                    (click)="openAbandonDialog(2)" class="mr-3">
+              <mat-icon aria-label="label">directions_run</mat-icon>
+            </button>
+          </td>
+        </div>
+      </tr>
+    </table>
+  </div>
+</div>
+<mat-error class="position-absolute" *ngIf="calculatedWinner == 0">
+  {{this.getErrorMessage()}}
+</mat-error>
+<div class="row justify-content-end">
+  <div mat-dialog-actions class="mt-0 mr-1">
+    <button mat-raised-button color="accent" class="text-white" (click)="save()">Guardar</button>
+    <button mat-raised-button class="ml-2" (click)="close()">Canelar</button>
+  </div>
+</div>
+
+<ng-template #secondDialog>
+  <h2 matDialogTitle class="text-center">{{playerQuited.playerName}} abandonó</h2>
+  <div mat-dialog-content>
+    <div class="row justify-content-center">
+      <div class="justifiedForm">
+        <mat-form-field color="accent">
+          <mat-label>Motivo de abandono</mat-label>
+          <mat-select name="motivo" (valueChange)="onReasonChanged($event)" ([value])="selectedReason">
+            <mat-option value="option1">Lesión</mat-option>
+            <mat-option value="option2">Familiar</mat-option>
+            <mat-option value="option3">Enfermedad</mat-option>
+            <mat-option value="option4">Ataque cardíaco</mat-option>
+            <mat-option value="option5">Se murió</mat-option>
+            <mat-option value="option6">Acepto la derrota</mat-option>
+            <mat-option value="option7">Otro</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field color="accent" *ngIf="selectedReason == 'option7'">
+          <textarea matInput
+                    placeholder="Escribe motivo"
+                    cdkTextareaAutosize
+                    #autosize="cdkTextareaAutosize"
+                    cdkAutosizeMinRows="2"
+                    cdkAutosizeMaxRows="5"
+                    [value]="playerQuited.reason"
+                    (change)="onReasonChange($event)"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <mat-dialog-actions align="end">
+    <button mat-stroked-button color="accent" (click)="saveAbandonDialog()">Aceptar</button>
+    <div class="m-1"></div>
+    <button mat-stroked-button (click)="closeAbandonDialog()" color="primary">Cancelar</button>
+  </mat-dialog-actions>
+</ng-template>

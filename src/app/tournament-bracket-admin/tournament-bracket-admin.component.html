@@ -1,0 +1,130 @@
+<div class="container bg-white p-2">
+
+  <div class="row justify-content-center my-3">
+    <h4 class="d-inline text-center px-2">Rol del torneo</h4>
+    <!-- <button mat-raised-button color="accent" class="text-white" (click)="addMatchesToFirebase()">Registrar
+      Partidos</button> -->
+  </div>
+
+  <div class="tournament-container" *ngIf="this.tournament.numberOfPlayers == 8">
+    <div class="tournament-headers">
+      <h4>1/4 de final</h4>
+      <h4>Semifinales</h4>
+      <h4>Final</h4>
+    </div>
+
+    <div class="tournament-brackets">
+
+      <ul class="bracket bracket-1">
+        <li class="team-item" *ngFor="let match of matches4">
+          <app-match-score-admin [match]="match" [tournamentPlayers]="availablePlayers"
+                                 (playersAssigned)="onPlayersAssigned($event)">
+          </app-match-score-admin>
+        </li>
+      </ul>
+      <ul class="bracket bracket-2">
+        <li class="team-item" *ngFor="let match of matches2">
+          <app-match-score-admin [match]="match" [tournamentPlayers]="availablePlayers"
+                                 (playersAssigned)="onPlayersAssigned($event)">
+          </app-match-score-admin>
+        </li>
+      </ul>
+      <ul class="bracket bracket-3">
+        <li class="team-item" *ngFor="let match of matches1">
+          <app-match-score-admin [match]="match" [tournamentPlayers]="availablePlayers"
+                                 (playersAssigned)="onPlayersAssigned($event)">
+          </app-match-score-admin>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class=" tournament-container" *ngIf="this.tournament.numberOfPlayers == 16">
+    <div class="tournament-headers">
+      <h4>Ronda de 16</h4>
+      <h4>1/4 de final</h4>
+      <h4>Semifinales</h4>
+      <h4>Final</h4>
+    </div>
+
+    <div class="tournament-brackets">
+      <ul class="bracket bracket-1">
+        <li class="team-item" *ngFor="let match of matches8">
+          <app-match-score-admin [match]="match" [tournamentPlayers]="availablePlayers"
+                                 (playersAssigned)="onPlayersAssigned($event)">
+          </app-match-score-admin>
+        </li>
+      </ul>
+      <ul class="bracket bracket-2">
+        <li class="team-item" *ngFor="let match of matches4">
+          <app-match-score-admin [match]="match" [tournamentPlayers]="availablePlayers"
+                                 (playersAssigned)="onPlayersAssigned($event)">
+          </app-match-score-admin>
+        </li>
+      </ul>
+      <ul class="bracket bracket-3">
+        <li class="team-item" *ngFor="let match of matches2">
+          <app-match-score-admin [match]="match" [tournamentPlayers]="availablePlayers"
+                                 (playersAssigned)="onPlayersAssigned($event)">
+          </app-match-score-admin>
+        </li>
+      </ul>
+      <ul class="bracket bracket-4">
+        <li class="team-item" *ngFor="let match of matches1">
+          <app-match-score-admin [match]="match" [tournamentPlayers]="availablePlayers"
+                                 (playersAssigned)="onPlayersAssigned($event)">
+          </app-match-score-admin>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tournament-container" *ngIf="this.tournament.numberOfPlayers == 32">
+    <div class="tournament-headers">
+      <h4>Ronda de 32</h4>
+      <h4>Ronda de 16</h4>
+      <h4>1/4 de final</h4>
+      <h4>Semifinales</h4>
+      <h4>Final</h4>
+    </div>
+
+    <div class="tournament-brackets">
+      <ul class="bracket bracket-1">
+        <li class="team-item" *ngFor="let match of matches16">
+          <app-match-score-admin [match]="match" [tournamentPlayers]="getAvailablePlayers()"
+                                 (playersAssigned)="onPlayersAssigned($event)">
+          </app-match-score-admin>
+        </li>
+      </ul>
+      <ul class="bracket bracket-2">
+        <li class="team-item" *ngFor="let match of matches8">
+          <app-match-score-admin [match]="match" [tournamentPlayers]="getAvailablePlayers()"
+                                 (playersAssigned)="onPlayersAssigned($event)">
+          </app-match-score-admin>
+        </li>
+      </ul>
+      <ul class="bracket bracket-3">
+        <li class="team-item" *ngFor="let match of matches4">
+          <app-match-score-admin [match]="match" [tournamentPlayers]="getAvailablePlayers()"
+                                 (playersAssigned)="onPlayersAssigned($event)">
+          </app-match-score-admin>
+        </li>
+      </ul>
+      <ul class="bracket bracket-4">
+        <li class="team-item" *ngFor="let match of matches2">
+          <app-match-score-admin [match]="match" [tournamentPlayers]="getAvailablePlayers()"
+                                 (playersAssigned)="onPlayersAssigned($event)">
+          </app-match-score-admin>
+        </li>
+      </ul>
+      <ul class="bracket bracket-5">
+        <li class="team-item" *ngFor="let match of matches1">
+          <app-match-score-admin [match]="match" [tournamentPlayers]="getAvailablePlayers()"
+                                 (playersAssigned)="onPlayersAssigned($event)">
+          </app-match-score-admin>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div>

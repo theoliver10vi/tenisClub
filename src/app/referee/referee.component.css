@@ -1,0 +1,8 @@
+.bgColor-light {
+	background-color: #E6E6E5;
+}
+
+.tournament-icon {
+	background-image: url('/assets/icons/torneo.svg');
+	background-size : cover;
+}

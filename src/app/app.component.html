@@ -1,0 +1,75 @@
+
+<mat-toolbar class="mat-elevation-z4 fixed-navigation-bar" color="primary">
+  <a href="">
+    <img src="assets/icons/tengular.svg" height="60">
+  </a>
+
+  <span class="fill-remaining-space"></span>
+  <button class="link" mat-flat-button color="primary" [routerLink]="['/torneos']">
+    <img class="buttonLink" src="assets/icons/torneo.svg" height="35" align="left">
+    <h2 class="line">Torneos</h2>
+  </button>
+  <button class="link" mat-flat-button color="primary" [routerLink]="['/resultados']">
+    <img class="buttonLink" src="assets/icons/marcador.svg" height="35" align="left">
+    <h2 class="line">Resultados</h2>
+  </button>
+  <button class="link" mat-flat-button color="primary" [routerLink]="['/rankings']">
+    <img class="buttonLink" src="assets/icons/ranking.svg" height="35" align="left">
+    <h2 class="line">Ranking</h2>
+  </button>
+  <button class="link" mat-flat-button color="primary" [routerLink]="['/convocatorias']">
+    <img class="buttonLink" src="assets/icons/convocatoria.svg" height="35" align="left">
+    <h2 class="line">Convocatorias</h2>
+  </button>
+
+
+  <!--
+<button type="button" id="botonOn" (click)="FbotonOn()"> on </button>
+-->
+
+<span class="fill-remaining-space"></span>
+  <button mat-flat-button color="accent" type="button" id="botonOn" (click)="openDialog()" (click)="FbotonOn()">
+  <h2 class="whiteText">Iniciar sesión</h2>
+  </button >
+
+  <button color="accent" (click)="reload()" height=".5" width=".5">
+    </button >
+
+  <!--
+  <span class="fill-remaining-space"></span>
+  <button class="link" mat-flat-button color="accent" (click)="openDialog()">
+    <h2 class="whiteText">Iniciar sesión</h2>
+  </button>-->
+</mat-toolbar>
+
+<router-outlet></router-outlet>
+
+<!-- Footer -->
+<footer class="footer-distributed">
+
+  <div class="footer-right">
+    <img href="https://github.com/oscar2706/Tengula" src="assets/icons/tengular.svg" height="50" width="100"class="fa fa-github">
+
+  </div>
+
+  <div class="footer-left">
+
+    <p class="footer-links">
+      <a href="#">Inicio</a>
+      ·
+      <a href="#">Torneos</a>
+      ·
+      <a href="#">Resultados</a>
+      ·
+      <a href="#">Ranking</a>
+      ·
+      <a href="#">Convocatoria</a>
+      ·
+      <a href="#">Contacto</a>
+    </p>
+
+    <p>Tengular &copy;Primavera 2019</p>
+  </div>
+
+</footer>
+

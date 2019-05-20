@@ -1,0 +1,189 @@
+<mat-card appMaterialElevation defaultElevation=1>
+  <button mat-icon-button class="optionsButton" [matMenuTriggerFor]="menu"
+          [ngStyle]="{display: this.match.played == true ? 'none' : 'inline'}" style="outline:none;">
+    <mat-icon>arrow_drop_down_circle</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu" overlapTrigger=false>
+    <button mat-menu-item style="outline:none;" (mouseover)="hover=true" (mouseleave)="hover=false"
+            [ngStyle]="{display: this.match.firstRound && match.player.length == 0 ? 'inline' : 'none'}"
+            (click)="openPlayersDialog()">
+      <mat-icon [ngStyle]="{color: hover ? '#EE8134' : '#757575' }">group_add</mat-icon>
+      <span>Rolar partido</span>
+    </button>
+    <button mat-menu-item style="outline:none;" (mouseover)="hover1=true" (mouseleave)="hover1=false"
+            [ngStyle]="{display: !match.firstRound && match.date == '' ? 'inline' : 'none'}"
+            (click)="openDateDialog()">
+      <mat-icon [ngStyle]="{color: hover1  ? '#EE8134' : '#757575' }">today</mat-icon>
+      <span>Asignar fecha</span>
+    </button>
+    <button mat-menu-item style="outline:none;" (mouseover)="hover2=true" (mouseleave)="hover2=false"
+            [ngStyle]="{display: match.date != '' && !match.suspended ? 'inline' : 'none'}"
+            (click)="opensuspendDialog()">
+      <mat-icon [ngStyle]="{color: hover2  ? '#EE8134' : '#757575' }">stop</mat-icon>
+      <span>Suspender</span>
+    </button>
+    <button mat-menu-item style="outline:none;" (mouseover)="hover3=true" (mouseleave)="hover3=false"
+            [ngStyle]="{display: this.match.suspended ? 'inline' : 'none'}"
+            (click)="opensuspendDialog()">
+      <mat-icon [ngStyle]="{color: hover3  ? '#EE8134' : '#757575' }">play_circle_outline</mat-icon>
+      <span>Reanudar</span>
+    </button>
+    <button mat-menu-item style="outline:none;" (mouseover)="hover4=true" (mouseleave)="hover4=false"
+            [ngStyle]="{display: this.match.date == '' ? 'none' : 'inline'}"
+            (click)="openDateDialog()">
+      <mat-icon [ngStyle]="{color: hover4  ? '#EE8134' : '#757575' }">update</mat-icon>
+      <span>Cambiar fecha</span>
+    </button>
+  </mat-menu>
+  <mat-card-content class=" m-0 p-0">
+    <table class="matchResult" *ngIf="match.played || match.player.length >= 2; else pendiente">
+      <tr>
+        <td class="player"
+            [ngClass]="{winner: match.winner == match.player[0] && match.round != '1', champion:match.winner == match.player[0] && match.round == '1'}">
+          <mat-icon class="d-inline float-left pr-2"
+                    *ngIf="this.match.played && this.match.round == '1' && match.winner == match.player[0]">looks_one
+          </mat-icon>
+          <p *ngIf="match.player.length <= 2">{{match.player[0]}}</p>
+          <div class="flex-column" *ngIf="match.player.length > 2">
+            <p app-match-score-info>{{match.player[0]}}</p>
+            <p app-match-score-info>{{match.player[1]}}</p>
+          </div>
+        </td>
+        <div *ngIf="this.match.played">
+          <td
+              [ngClass]="{setTop: match.score.team1[i].points > 0 || match.score.team2[i].points > 0 }"
+              *ngFor="let set of match.score.team1; index as i;">
+            {{set.points | points: match.score.team2[i].points}}
+            <sup class="tiebreak">{{set.tiebreakPoints | points: match.score.team2[i].tiebreakPoints}}</sup>
+          </td>
+        </div>
+      </tr>
+      <tr>
+        <td class="player"
+            [ngClass]="{winner: match.winner == match.player[1] && match.round != '1', champion:match.winner == match.player[1] && match.round == '1'}">
+          <mat-icon class="d-inline float-left pr-2"
+                    *ngIf="this.match.played && this.match.round == '1' && match.winner == match.player[1]">looks_one
+          </mat-icon>
+          <p *ngIf="match.player.length <= 2">{{match.player[1]}}</p>
+          <div class="flex-column" *ngIf="match.player.length > 2">
+            <p app-match-score-info>{{match.player[2]}}</p>
+            <p app-match-score-info>{{match.player[3]}}</p>
+          </div>
+        </td>
+        <div *ngIf="this.match.played">
+          <td
+              [ngClass]="{setBottom: match.score.team1[i].points > 0 || match.score.team2[i].points > 0 }"
+              *ngFor="let set of match.score.team2; index as i;">
+            {{set.points | points: match.score.team1[i].points}}
+            <sup class="tiebreak">{{set.tiebreakPoints | points: match.score.team1[i].tiebreakPoints}}</sup>
+          </td>
+        </div>
+      </tr>
+    </table>
+    <ng-template #pendiente>
+      <div class="p-4">
+        <h5>Pendiente</h5>
+      </div>
+    </ng-template>
+    <p class="text-black-50 d-inline-block" *ngIf="match.date != ''">{{this.match.date}}</p>
+    <!-- <mat-icon class="ml-2 d-inline-block text-accent" *ngIf="match.suspended">cancel</mat-icon> -->
+    <p class="ml-2 text-accent d-inline-block" *ngIf="match.suspended">({{this.match.suspended | suspended}})</p>
+  </mat-card-content>
+</mat-card>
+
+<!-- Dialogo jugadores y fecha -->
+<ng-template #playersDialog>
+  <div class="row justify-content-center">
+    <h1 matDialogTitle>Rol del partido</h1>
+  </div>
+  <mat-dialog-content>
+    <div class="row justify-content-center">
+      <mat-form-field color="accent">
+        <mat-label>Jugador 1</mat-label>
+        <mat-select [(value)]="selectedPlayer[0]" (selectionChange)="onPlayerSelected($event,0)">
+          <mat-option *ngFor="let player of availablePlayers1" [value]="player">
+            {{player}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="mx-5"></div>
+      <mat-form-field color="accent">
+        <mat-label>Jugador 2</mat-label>
+        <mat-select [(value)]="selectedPlayer[1]" (selectionChange)="onPlayerSelected($event,1)">
+          <mat-option *ngFor="let player of availablePlayers2" [value]="player">
+            {{player}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field color="accent">
+        <input matInput [matDatepicker]="picker" placeholder="Fecha partido"
+               (dateChange)="onUpdateDate($event)">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <div class="row justify-content-end">
+    <div mat-dialog-actions class="mt-0 mr-1">
+      <button mat-raised-button color="accent" class="text-white" style="outline:none;"
+              (click)="savePlayersDialog()">Aceptar</button>
+      <div class="m-1"></div>
+      <button mat-raised-button style="outline:none;" (click)="closePlayersDialog()">Cancelar</button>
+    </div>
+  </div>
+</ng-template>
+
+<!-- Dialogo cambiar fecha -->
+<ng-template #dateDialog>
+  <div class="row justify-content-center">
+    <h1 matDialogTitle *ngIf="match.date != '' else asignar">Cambio de fecha</h1>
+    <ng-template #asignar>
+      <h1 matDialogTitle>Asignar fecha</h1>
+    </ng-template>
+  </div>
+  <mat-dialog-content>
+    <div class="row justify-content-center">
+      <mat-form-field color="accent">
+        <input matInput [matDatepicker]="picker" placeholder="Nueva fecha"
+               (dateChange)="onUpdateDate($event)">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <div class="row justify-content-end">
+    <div mat-dialog-actions class="mt-0 mr-1">
+      <button mat-raised-button color="accent" class="text-white" style="outline:none;"
+              (click)="saveDateDialog()">Aceptar</button>
+      <div class="m-1"></div>
+      <button mat-raised-button style="outline:none;" (click)="closeDateDialog()">Cancelar</button>
+    </div>
+  </div>
+</ng-template>
+
+<!-- Dialogo confirma suspensión o reanudar -->
+<ng-template #suspendDialog>
+  <div class="row justify-content-center">
+    <h1 matDialogTitle *ngIf="!match.suspended else reanudar">Suspensión de partido</h1>
+    <ng-template #reanudar>
+      <h1 matDialogTitle>Reanudar partido</h1>
+    </ng-template>
+  </div>
+  <mat-dialog-content>
+    <div class="row justify-content-center">
+      <p *ngIf="!match.suspended else reanudara">Se <strong>suspenderá</strong></p>
+      <ng-template #reanudara>
+        <p>Se <strong>reanudará</strong></p>
+      </ng-template>
+      <p>&nbsp; el partido de <strong> {{match.player[0]}} vs {{match.player[1]}} </strong></p>
+    </div>
+  </mat-dialog-content>
+  <div class="row justify-content-end">
+    <div mat-dialog-actions class="mt-0 mr-1">
+      <button mat-raised-button color="accent" class="text-white" style="outline:none;"
+              (click)="savesuspendDialog()">Aceptar</button>
+      <div class="m-1"></div>
+      <button mat-raised-button style="outline:none;" (click)="closesuspendDialog()">Cancelar</button>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,16 @@
+<form>
+  <link href="https://fonts.googleapis.com/css?family=Fugaz+One" rel="stylesheet">
+<div class="group" data-aos="fade-down-right">
+  <input type="text" (change)="updateName($event)"><span class="highlight"></span><span class="bar"></span>
+  <label>Nombre</label>
+</div>
+<div class="password" data-aos="fade-down-left">
+  <input type="password" (change)="updatePassword($event)"><span class="highlight"></span><span class="bar"></span>
+  <label>Contraseña</label>
+</div>
+<div class="row justify-content-md-center">
+  <button class="link" mat-flat-button color="accent" class ="whiteText" (click)="loggUser()">Iniciar Sesión</button>
+</div>
+</form>
+
+

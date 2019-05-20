@@ -1,0 +1,50 @@
+.tiebreak {
+	bottom: 2ex;
+	left  : 1ex;
+}
+
+.setTop {
+	padding-left : 1rem;
+	padding-right: 1rem;
+}
+
+.setBottom {
+	padding-left : 1rem;
+	padding-right: 1rem;
+}
+
+.player {
+	padding-right: 1rem;
+}
+
+.winner {
+	font-weight: 500;
+	color      : #424242;
+}
+
+.addBorder {
+	border: 1px solid transparent;
+}
+
+.bgColor-Accent {
+	background-color: #EE8133;
+}
+
+.text-accent {
+	color: #EE8133;
+}
+
+.matchResult {
+	margin-left : auto;
+	margin-right: auto;
+}
+
+.scoreInput {
+	min-width: 35px;
+	max-width: 35px;
+}
+
+.justifiedForm {
+	display       : flex;
+	flex-direction: column;
+}

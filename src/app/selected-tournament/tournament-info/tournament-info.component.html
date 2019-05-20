@@ -1,0 +1,73 @@
+<div class="container mt-5 pt-4">
+  <div class="row justify-content-start">
+    <div class="col-sm-12 col-lg-4">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title style="color:#EE8134;">Información del torneo</mat-card-title>
+        </mat-card-header>
+        <img class="rounded mx-auto d-block"
+        src="assets/images/torneo.jpg" alt="">
+        <mat-card-content>
+          <div class="mt-3">
+            <div class="d-block m-2">
+              <h6 class="d-inline">Modalidad: </h6>
+              <p class="d-inline pl-2">Individual</p>
+            </div>
+            <div class="d-block m-2">
+              <h6 class="d-inline">Categoria:</h6>
+              <p class="d-inline pl-2">Varonil</p>
+            </div>
+            <div class="d-block m-2">
+              <h6 class="d-inline">Otras reglas:</h6>
+              <p class="d-inline pl-2"> </p>
+            </div>
+            <div class="d-block m-2">
+              <h6 class="d-inline">Fecha de inscripcón:</h6>
+              <p class="d-inline pl-2">5/5/19 - 20/5/19</p>
+            </div>
+            <div class="d-block m-2">
+              <h6 class="d-inline">Premiación:</h6>
+              <p class="d-inline pl-2">$123,456,789.00</p>
+            </div>
+            <div class="d-block m-2">
+              <h6 class="d-inline">Costo de inscripción:</h6>
+              <p class="d-inline pl-2">$3,000.00</p>
+            </div>
+          </div>
+        </mat-card-content>
+
+      </mat-card>
+    </div>
+    <div class="col-sm-12 col-lg-8">
+      <mat-tab-group color="accent">
+        <mat-tab label="Jugadores participantes">
+          <div class="m-3">
+            <mat-table [dataSource]="sourceNextMatches" class="mat-elevation-z2">
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef [style.color]="'#EE8134'"> Nombre </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+              </ng-container>
+
+              <!-- LastName Column -->
+              <ng-container matColumnDef="lastname">
+                <mat-header-cell *matHeaderCellDef [style.color]="'#EE8134'"> Apellido </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.lastname}} </mat-cell>
+              </ng-container>
+
+              <!-- Position Column -->
+              <ng-container matColumnDef="position">
+                <mat-header-cell *matHeaderCellDef [style.color]="'#EE8134'"> Posición</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+              </ng-container>
+
+
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</div>

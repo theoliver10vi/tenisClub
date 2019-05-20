@@ -1,0 +1,67 @@
+.setTop {
+	width         : 2rem;
+	padding-bottom: 2.5rem;
+	border-left   : 1px solid #E1E1E1;
+	border-right  : 1px solid #E1E1E1;
+	border-bottom : 1px solid #E1E1E1;
+}
+
+.tiebreak {
+	font-size: 0.7rem;
+}
+
+.setBottom {
+	width       : 2rem;
+	padding-top : 2.5rem;
+	border-left : 1px solid #E1E1E1;
+	border-right: 1px solid #E1E1E1;
+}
+
+.player {
+	padding-right: 1rem;
+	color        : #424242;
+}
+
+.winner {
+	font-weight: 500;
+	color      : #424242;
+}
+
+.champion {
+	font-weight: 500;
+	color      : #F08121;
+}
+
+.matchResult {
+	margin-left : auto;
+	margin-right: auto;
+}
+
+.addBorder {
+	border: 1px solid transparent;
+}
+
+.bgColor-Accent {
+	background-color: #EE8133;
+}
+
+.text-accent {
+	color: #EE8133;
+}
+
+.optionsButton {
+	color   : #757575;
+	position: absolute;
+	top     : 2px;
+	right   : 2px;
+}
+
+.team {
+	display        : flex;
+	align-items    : center;
+	justify-content: center;
+}
+
+::ng-deep.snackBar-m6 {
+	margin-top: 6rem !important;
+}
